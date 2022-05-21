@@ -2,10 +2,10 @@
 
 ## Para rodar os doctests
 ```bash
-python -m doctest -v <nome_do_arquivo>.py
+python3 -m doctest -v converter-hour.py
 ```
 
 ## Para rodar o programa
 ```bash
-python <nome_do_arquivo>.py
+python3 converter-hour.py
 ```
