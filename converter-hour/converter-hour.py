@@ -15,9 +15,11 @@ valores de entrada todas as vezes que desejar
 """
 
 # Constante com o mapa dos períodos
+KEY_A = "A"
+KEY_P = "P"
 PERIODS = {
-    "A": "A.M.",
-    "P": "P.M."
+    KEY_A: "A.M.",
+    KEY_P: "P.M."
 }
 
 
@@ -33,9 +35,11 @@ def show_hour(hour, minute, period):
     >>> show_hour(12, 15, "A")
     12:15 A.M.
     >>> show_hour(1, 15, "P")
-    1:15 P.M.
+    01:15 P.M.
+    >>> show_hour(1, 1, "P")
+    01:01 P.M.
     """
-    print(f"{hour}:{minute} {PERIODS[period]}")
+    print(f"{hour:0>2}:{minute:0>2} {PERIODS[period]}")
 
 
 def converter_hour(hour):
@@ -46,14 +50,20 @@ def converter_hour(hour):
     :return: int, string
 
     >>> converter_hour(12)
+    (12, 'P')
+    >>> converter_hour(0)
     (12, 'A')
     >>> converter_hour(13)
     (1, 'P')
     """
-    if hour <= 12:
-        return hour, "A"
+    if hour == 0:
+        return 12, KEY_A
+    elif hour < 12:
+        return hour, KEY_A
+    elif hour == 12:
+        return hour, KEY_P
     else:
-        return hour - 12, "P"
+        return hour - 12, KEY_P
 
 
 if __name__ == "__main__":
@@ -61,14 +71,14 @@ if __name__ == "__main__":
         # Solicita as horas
         while True:
             input_hour = int(input("Hora no formato 24hs: "))
-            if 0 < input_hour < 24:
+            if 0 <= input_hour < 24:
                 break
             print("Hora inválida!")
 
         # Solicita os minutos
         while True:
             input_minute = int(input("Minutos: "))
-            if 0 < input_minute < 60:
+            if 0 <= input_minute < 60:
                 break
             print("Minutos inválido!")
 
